@@ -13,7 +13,7 @@ namespace HaromszogekSzoftverfejleszto.Modell
         private int b;
         private int c;
 
-        //ha keresünk egy háromszöget
+        //ha keresünk egy háromszöget le fogjuk kérni az id-jét
         public int getId()
         {
             return id;

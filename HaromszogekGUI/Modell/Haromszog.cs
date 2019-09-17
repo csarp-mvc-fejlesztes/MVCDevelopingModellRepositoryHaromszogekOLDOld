@@ -13,31 +13,31 @@ namespace HaromszogekSzoftverfejleszto.Modell
         private int b;
         private int c;
 
+        //ha keresünk egy háromszöget
         public int getId()
         {
             return id;
         }
-
         public int getA()
         {
             return a;
         }
-
         public int getB()
         {
             return b;
         }
-
         public int getC()
         {
             return c;
         }
 
+        //ha létrejön egy háromszög, akkor kap egy ID-t
         public void setID(int id)
         {
             this.id = id;
         }
 
+        //meglévő háromszög módosításakor használjuk
         public void set(Haromszog ujHaromszogAdatai)
         {
             this.a = ujHaromszogAdatai.getA();
@@ -45,6 +45,8 @@ namespace HaromszogekSzoftverfejleszto.Modell
             this.c = ujHaromszogAdatai.getC();
         }
 
+        //a formon új háromszög adatainak megadásakor 
+        //létrejön a háromszög
         public Haromszog(int a, int b, int c)
         {
             this.a = a;
@@ -52,6 +54,7 @@ namespace HaromszogekSzoftverfejleszto.Modell
             this.c = c;
         }
 
+        //új háromszög jön létre egy fájl sorból
         public Haromszog(string sor)
         {
             string[] adat = sor.Split(' ');

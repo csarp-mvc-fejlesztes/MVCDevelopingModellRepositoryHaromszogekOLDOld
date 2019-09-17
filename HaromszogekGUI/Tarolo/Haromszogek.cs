@@ -12,18 +12,22 @@ namespace HaromszogekSzoftverfejleszto.Tarolo
 {
     class Haromszogek
     {
+        //lista a háromszögek tárolására
         List<Haromszog> haromszogek;
 
         public Haromszogek()
         {
+            //lista példányosítása
             haromszogek = new List<Haromszog>();
         }
 
+        //visszaadja a teljes listát
         public List<Haromszog> getHaromszogek()
         {
             return haromszogek;
         }
 
+        // új háromszög lehetséges ID-je
         public int getNextId()
         {
             int max = -1;
@@ -35,6 +39,7 @@ namespace HaromszogekSzoftverfejleszto.Tarolo
             return max + 1;
         }
 
+        //háromszög adatainak beolvasása a fájlból
         public void beolvas()
         {
             try
@@ -95,22 +100,23 @@ namespace HaromszogekSzoftverfejleszto.Tarolo
             return terulet;
         }
 
+        //a listában kijelölt elem
         public Haromszog getAdottElem(int index)
         {
             try
             {
                 return haromszogek.ElementAt(index);
             }
-            catch (RepositoryException re)
+            catch (TaroloException re)
             {
                 Debug.WriteLine(index + ". elem nem létezik.");
             }
             return null;
         }
 
+        //törli az adott id-jű elemet
         public void torolIdAlapjan(int id)
-        {
-            /*  int index = 0;
+        { /*  int index = 0;
               foreach(Haromszog h in haromszogek)
               {
                   if (h.getId()==id)
@@ -121,17 +127,19 @@ namespace HaromszogekSzoftverfejleszto.Tarolo
                   index = index + 1;
               }
               return;*/
-
-            haromszogek.RemoveAt(haromszogek.FindIndex(h => h.getId() == id));
+            haromszogek.RemoveAt(
+                haromszogek.FindIndex(h => h.getId() == id));
         }
 
+        //hozzáadja a listához új id-vel a h háromszöget
         public void hozzaadHaromszoget(Haromszog h)
         {
             int id = getNextId();
             h.setID(id);
             haromszogek.Add(h);
         }
-
+        //megkeresi az adott id-jű háromszöget
+        //és módosítja az adatait ujHaromszogAdatai-ra
         public void modositHaromszoget(int id, Haromszog ujHaromszogAdatai)
         {
             try

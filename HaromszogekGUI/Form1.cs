@@ -15,18 +15,21 @@ namespace HaromszogekGUI
 {
     public partial class Form1 : Form
     {
-
+        //repository (tároló)
         Haromszogek haromszogek;
 
         public Form1()
         {
+            //repository (tároló) példányosítása
             haromszogek = new Haromszogek();
             InitializeComponent();
         }
 
         private void buttonBeolvas_Click(object sender, EventArgs e)
         {
+            //beolvas a fájlból 
             haromszogek.beolvas();
+            //adatokat megjelenit a ListBox-ban
             megjelenitHaromszogeketListboxban();
         }
 
@@ -37,6 +40,7 @@ namespace HaromszogekGUI
                 return;
             try
             {
+                //kiválasztott háromszög lekérése és megjelenítése
                 Haromszog h = haromszogek.getAdottElem(index);
                 megjelenitHaromszoget(h);
             }
@@ -47,7 +51,7 @@ namespace HaromszogekGUI
         }
 
         private void megjelenitHaromszoget(Haromszog h)
-        {
+        {           
             textBoxAOldal.Text = h.getA().ToString();
             textBoxBOldal.Text = h.getB().ToString();
             textBoxCOldal.Text = h.getC().ToString();
@@ -55,6 +59,7 @@ namespace HaromszogekGUI
 
         private void megjelenitHaromszogeketListboxban()
         {
+            //ListBox törlése majd adatokkal feltöltése
             listBoxHaromszogek.DataSource = null;
             listBoxHaromszogek.DataSource = haromszogek.getHaromszogek();
         }
@@ -67,9 +72,12 @@ namespace HaromszogekGUI
                 return;
             try
             {
+                //kiválasztott elem
                 Haromszog h = haromszogek.getAdottElem(index);
+                //id-jét megkeressük, töröljük
                 int id = h.getId();
                 haromszogek.torolIdAlapjan(id);
+                //majd frissítjük a ListBox-ot
                 megjelenitHaromszogeketListboxban();
             }
             catch (Exception ex)
@@ -117,8 +125,11 @@ namespace HaromszogekGUI
             }
             if (!vanHiba)
             {
+                //A jó adatokkal létrehozzuk a háromszöget
                 Haromszog h = new Haromszog(a, b, c);
+                //A létrehozott háromszöget hozzáadjuk a repository-hoz
                 haromszogek.hozzaadHaromszoget(h);
+                //Megjelenítjük az új háromszöggel a háromszögeket a Listboxban
                 megjelenitHaromszogeketListboxban();
             }
         }
@@ -162,13 +173,18 @@ namespace HaromszogekGUI
             }
             if (!vanHiba)
             {
+                //Kell a kijelölt elem, mert őt módosítjuk
                 int index = listBoxHaromszogek.SelectedIndex;
                 if (index < 0) //üres a ListBox
                     return;
                 Haromszog modositando = haromszogek.getAdottElem(index);
+                //Lekérjük a módosítandó elem ID-jét 
                 int id = modositando.getId();
+                //Létrehozzuk a háromszöget
                 Haromszog h = new Haromszog(a, b, c);                
+                //A repositoryban az adott id-vel rendelekező háromszoget módosítjuk az új h háromszögre
                 haromszogek.modositHaromszoget(id, h);
+                //Frissítjük a ListBox-ot az új adatokkal
                 megjelenitHaromszogeketListboxban();
             }
         }
